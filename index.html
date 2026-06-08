@@ -2,10 +2,57 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>링크로 글 복사하기</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>글 복사하기</title>
+    <style>
+        /* Reset body margin/padding and set full viewport height */
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: #f5f7fa;  /* 부드러운 배경색 (선택사항) */
+            display: flex;
+            align-items: center;    /* 세로 중앙 정렬 */
+            justify-content: center; /* 가로 중앙 정렬 */
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        /* 유동적인 버튼 스타일 */
+        .copy-button {
+            display: inline-block;
+            /* 패딩: 화면 너비에 따라 상대적으로 변하도록 clamp 또는 vw 사용 */
+            padding: 2.5vh 6vw;
+            /* 최소 패딩과 최대 패딩을 제한 (가독성 유지) */
+            padding: clamp(12px, 3vh, 24px) clamp(20px, 8vw, 60px);
+            
+            background: #007aff;
+            color: white;
+            
+            /* 폰트 크기: 뷰포트 너비에 따라 반응형 + 최소/최대 제한 */
+            font-size: clamp(18px, 5vw, 40px);
+            
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 122, 255, 0.3);
+            transition: transform 0.1s ease, background 0.2s;
+            cursor: pointer;
+            border: none;
+            /* 터치 영역 넉넉하게 */
+            touch-action: manipulation;
+        }
+
+        /* 살짝 클릭 피드백 */
+        .copy-button:active {
+            transform: scale(0.97);
+            background: #005fc1;
+        }
+    </style>
 </head>
 <body>
-<a href="#" id="copyLink" style="display:inline-block; padding:20px 40px; background:#007aff; color:white; font-size:28px; border-radius:60px; text-decoration:none; font-weight:bold; box-shadow:0 4px 8px rgba(0,0,0,0.2);">✍️ 한 번 클릭하면 복사됨</a>
+    <a href="#" id="copyLink" class="copy-button">✍️ 한 번 클릭하면 복사됨</a>
+
     <script>
         const textToCopy = `나는 방금 이 사진에 직관적으로 끌렸다.
 다음 두 관점으로 분석해줘.
@@ -16,8 +63,9 @@
 
 마지막으로, 위 분석을 종합해 내가 진정 추구하는 비전을 한 문장으로 정리해줘.`;
 
-        document.getElementById('copyLink').addEventListener('click', async (e) => {
-            e.preventDefault(); // 링크 기본 이동 막기
+        const copyBtn = document.getElementById('copyLink');
+        copyBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
             try {
                 await navigator.clipboard.writeText(textToCopy);
                 alert('✅ 글이 복사되었습니다.');
