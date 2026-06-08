@@ -5,7 +5,7 @@
     <title>링크로 글 복사하기</title>
 </head>
 <body>
-    <a href="#" id="copyLink">📋 여기를 클릭하면 글이 복사됩니다</a>
+<a href="#" id="copyLink" style="display:inline-block; padding:20px 40px; background:#007aff; color:white; font-size:28px; border-radius:60px; text-decoration:none; font-weight:bold; box-shadow:0 4px 8px rgba(0,0,0,0.2);">✍️ 한 번 클릭하면 복사됨</a>
     <script>
         const textToCopy = `나는 방금 이 사진에 직관적으로 끌렸다.
 다음 두 관점으로 분석해줘.
