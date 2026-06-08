@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>링크로 글 복사하기</title>
+</head>
+<body>
+    <a href="#" id="copyLink">📋 여기를 클릭하면 글이 복사됩니다</a>
+    <script>
+        const textToCopy = `나는 방금 이 사진에 직관적으로 끌렸다.
+다음 두 관점으로 분석해줘.
+
+① [아들러 목적론] 이 선택에 담긴 미래 지향적 욕구는 무엇인가? 내가 '이 사진이 있는 삶'을 원한다면, 그 삶에서 나는 무엇을 이루려는 사람인가?
+
+② [결핍 vs 성장] 이 끌림이 지금 내게 부족한 무언가에서 비롯된 건지, 아니면 이미 가진 힘을 더 키우려는 욕구인지 구분해줘.
+
+마지막으로, 위 분석을 종합해 내가 진정 추구하는 비전을 한 문장으로 정리해줘.`;
+
+        document.getElementById('copyLink').addEventListener('click', async (e) => {
+            e.preventDefault(); // 링크 기본 이동 막기
+            try {
+                await navigator.clipboard.writeText(textToCopy);
+                alert('✅ 글이 복사되었습니다.');
+            } catch (err) {
+                alert('❌ 복사 실패: ' + err);
+            }
+        });
+    </script>
+</body>
+</html>
